@@ -157,7 +157,13 @@ def get_sample_search_engine_data() -> pd.DataFrame:
 
 
 def get_sample_os_data() -> pd.DataFrame:
-    """Sample OS market share data (fallback)"""
+    """Sample Mobile OS market share data (fallback)
+    
+    Real values from StatCounter (Jan 2026 - Mobile only):
+    - Android: ~71.5%
+    - iOS: ~27.6%
+    - Other: ~0.9%
+    """
     months = []
     for year in range(2023, 2027):
         for month in range(1, 13):
@@ -172,16 +178,14 @@ def get_sample_os_data() -> pd.DataFrame:
     def interp(start, end, count):
         return [round(start + i * (end - start) / (count - 1), 2) for i in range(count)]
     
+    # Mobile OS only data
     data = {
         "Date": months,
-        "Windows": interp(28.50, 26.20, n),
-        "Android": interp(42.80, 44.50, n),
-        "iOS": interp(17.20, 17.80, n),
-        "macOS": interp(6.80, 7.10, n),
-        "Unknown": interp(2.10, 1.95, n),
-        "Linux": interp(1.20, 1.35, n),
-        "Chrome OS": interp(0.95, 0.85, n),
-        "Other": interp(0.45, 0.25, n),
+        "Android": interp(70.80, 71.52, n),
+        "iOS": interp(28.40, 27.61, n),
+        "Samsung": interp(0.35, 0.42, n),
+        "KaiOS": interp(0.18, 0.15, n),
+        "Other": interp(0.27, 0.30, n),
     }
     
     return pd.DataFrame(data)

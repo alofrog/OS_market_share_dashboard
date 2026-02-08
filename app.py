@@ -108,7 +108,7 @@ end_month = get_current_end_month()
 st.info(f"📅 데이터 기간: 2023-06 ~ {end_month[:4]}-{end_month[4:]} | ⚠️ 현재 샘플 데이터 사용 중 (StatCounter API 접근 제한)")
 
 # Tabs
-tab1, tab2, tab3 = st.tabs(["🔍 Search Engine", "💻 Operating System", "🤖 AI Chatbot"])
+tab1, tab2, tab3 = st.tabs(["🔍 Search Engine", "📱 Mobile OS", "🤖 AI Chatbot"])
 
 # ============== Search Engine Tab ==============
 with tab1:
@@ -140,19 +140,19 @@ with tab1:
 
 # ============== OS Tab ==============
 with tab2:
-    st.header("Operating System Market Share")
+    st.header("Mobile OS Market Share")
     
     df_os = get_sample_os_data()
     os_list = [col for col in df_os.columns if col != "Date"]
     
     selected_os = st.multiselect(
-        "OS 선택:",
+        "Mobile OS 선택:",
         options=os_list,
         default=os_list,
         key="os"
     )
     
-    fig_os = create_stacked_area_chart(df_os, selected_os, "All Platforms", "Desktop + Mobile + Tablet + Console (%)")
+    fig_os = create_stacked_area_chart(df_os, selected_os, "Mobile OS", "Mobile OS market share (%)")
     st.plotly_chart(fig_os, use_container_width=True)
     
     st.subheader("Data Table")
